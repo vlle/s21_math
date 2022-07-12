@@ -3,6 +3,7 @@ CFLAGS:=-Wall -Werror -Wextra -std=c11 -pedantic
 LFLAGS:= $(shell pkg-config --cflags --libs check)
 SANITIZER:= #-fsanitize=address
 CFLAGS_TEST:= $(SANITIZER) --coverage -c -g 
+OBJ_DIR:=obj/
 MATH_FUNC:=s21*.c
 MATH_OBJ:=s21*.o
 MATH_TEST:= math_tests.c
@@ -12,6 +13,7 @@ all: s21_math.a test clean cpplint
 s21_math.a: clean_lib $(MATH_FUNC)
 	$(CC) $(CFLAGS) -c $(MATH_FUNC)
 	ar rc s21_math.a $(MATH_OBJ)
+	mv *.o obj/
 	ranlib 	s21_math.a
 
 test: clean_bin s21_math.a 
