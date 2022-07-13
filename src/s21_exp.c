@@ -1,10 +1,34 @@
 #include "s21_math.h"
 
 long double s21_exp(double x) {
-    long double s21_exp = 1;
-    for (register int i = 0; i < 500; i++) {
-        s21_exp += (s21_pow(x, i)) / (s21_fact(i));
-    }  // workerco: need to remake exp func. it depends on s21_pow and s21_pow depends on exp..
-    return s21_exp;
-}
+    long double y, q, ex, s, a;
+    int i, p;
 
+    p = s21_floor(x);  //  Выделение целой части х - p
+    q = x - p;          //  Выделение дробной части х - q
+    ex = S21_EXP;
+    y = 1;
+    i = 1;
+    if (x) {
+        if (p) {
+            do {
+                y *= ex;
+                i++;
+            } while (i <= s21_fabs(p));
+            if (p < 0)
+            y = 1 / y;
+        }
+        if (q) {
+            s = 1;
+            a = 1;
+            i = 1;
+            do {
+                a *= q / i;
+                s += a;
+                i++;
+            } while (s21_fabs(a) >= 1e-07 / y);
+            y *= s;
+        }
+    }
+    return y;
+}
