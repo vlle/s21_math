@@ -5,78 +5,6 @@
 #include "tests/s21_math_test.h"
 #include "s21_math.h"
 
-START_TEST(s21_ceilClassic) {
-    double x = 83.9283;
-    long double my_ans = s21_ceil(x);
-    long double true_ans = ceil(x);
-    ck_assert_ldouble_eq_tol(my_ans, true_ans, 1e-7);
-} END_TEST
-
-START_TEST(s21_ceilBig) {
-    double x = 1231783.9283;
-    long double my_ans = s21_ceil(x);
-    long double true_ans = ceil(x);
-    ck_assert_ldouble_eq_tol(my_ans, true_ans, 1e-7);
-} END_TEST
-
-START_TEST(s21_ceilZero) {
-    double x = 0;
-    long double my_ans = s21_ceil(x);
-    long double true_ans = ceil(x);
-    ck_assert_ldouble_eq_tol(my_ans, true_ans, 1e-7);
-} END_TEST
-
-START_TEST(s21_ceil_negative) {
-    double x = -783.9283;
-    long double my_ans = s21_ceil(x);
-    long double true_ans = ceil(x);
-    ck_assert_ldouble_eq_tol(my_ans, true_ans, 1e-7);
-} END_TEST
-
-START_TEST(s21_ceil_positive) {
-    double x = 3671.43561;
-    long double my_ans = s21_ceil(x);
-    long double true_ans = ceil(x);
-    ck_assert_ldouble_eq_tol(my_ans, true_ans, 1e-7);
-} END_TEST
-
-// START_TEST(s21_acos_too_negative) {
-//     double x = -12.781;
-//     long double my_ans = s21_acos(x);
-//     long double true_ans = acos(x);
-//     ck_assert_ldouble_nan(my_ans);
-//     ck_assert_ldouble_nan(true_ans);
-// } END_TEST
-//
-// START_TEST(s21_acos_negative) {
-//     double x = -0.67218;
-//     long double my_ans = s21_acos(x);
-//     long double true_ans = acos(x);
-//     ck_assert_ldouble_eq_tol(my_ans, true_ans, 1e-7);
-// } END_TEST
-//
-// START_TEST(s21_acos_zero) {
-//     double x = 1.0;
-//     long double my_ans = s21_acos(x);
-//     long double true_ans = acos(x);
-//     ck_assert_ldouble_eq_tol(my_ans, true_ans, 1e-7);
-// } END_TEST
-// 
-// START_TEST(s21_acos_positive) {
-//     double x = 0.4125638719;
-//     long double my_ans = s21_acos(x);
-//     long double true_ans = acos(x);
-//     ck_assert_ldouble_eq_tol(my_ans, true_ans, 1e-7);
-// } END_TEST
-// 
-// START_TEST(s21_acos_too_positive) {
-//     double x = 5.64278;
-//     long double my_ans = s21_acos(x);
-//     long double true_ans = acos(x);
-//     ck_assert_ldouble_nan(my_ans);
-//     ck_assert_ldouble_nan(true_ans);
-// } END_TEST
-
 START_TEST(s21_fmod_zero_division) {
     double x = 42647.78;
     double y = 0.0;
@@ -146,33 +74,6 @@ START_TEST(s21_absClassic) {
     ck_assert_int_eq(my_ans, true_ans);
 } END_TEST
 
-START_TEST(s21_sqrtZero) {
-    double y = 0;
-    long double my_ans = s21_sqrt(y);
-    long double true_ans = sqrt(y);
-    ck_assert_ldouble_eq_tol(my_ans, true_ans, 1e-7);
-} END_TEST
-
-START_TEST(s21_sqrtBig) {
-    double y = 1131112.1232131231421;
-    long double my_ans = s21_sqrt(y);
-    long double true_ans = sqrt(y);
-    ck_assert_ldouble_eq_tol(my_ans, true_ans, 1e-7);
-} END_TEST
-
-START_TEST(s21_sqrtClassic) {
-    double y = 1.1232131231421;
-    long double my_ans = s21_sqrt(y);
-    long double true_ans = sqrt(y);
-    ck_assert_ldouble_eq_tol(my_ans, true_ans, 1e-7);
-} END_TEST
-
-START_TEST(s21_sqrtLessZero) {
-    double y = -123112.412;
-    long double my_ans = s21_sqrt(y);
-    long double true_ans = sqrt(y);
-    ck_assert_ldouble_eq_tol(my_ans, true_ans, 1e-7);
-} END_TEST
 
 START_TEST(s21_tanClassic) {
     double x = 0.56;
@@ -216,40 +117,6 @@ START_TEST(s21_tanVeryVerylesszero) {
     ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
 } END_TEST
 
-START_TEST(s21_atanZero) {
-    double x = 0.0;
-    long double a2 = atan(x);
-    long double b2 = s21_atan(x);
-    ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
-} END_TEST
-
-START_TEST(s21_atanLesszero) {
-    double x = -0.56;
-    long double a2 = atan(x);
-    long double b2 = s21_atan(x);
-    ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
-} END_TEST
-
-START_TEST(s21_atanBig) {
-    double x = 1312.412312355;
-    long double a2 = atan(x);
-    long double b2 = s21_atan(x);
-    ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
-} END_TEST
-
-START_TEST(s21_atanLow) {
-    double x = -123.412312355;
-    long double a2 = atan(x);
-    long double b2 = s21_atan(x);
-    ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
-} END_TEST
-
-START_TEST(s21_atanClassic) {
-    double x = 0.412312355;
-    long double a2 = atan(x);
-    long double b2 = s21_atan(x);
-    ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
-} END_TEST
 
 START_TEST(s21_cosClassic) {
     double x = 0.412312355;
@@ -592,22 +459,6 @@ Suite* pow_suite(void) {
     return s;
 }
 
-Suite* atan_suite(void) {
-    Suite* s;
-    TCase* tc_core;
-
-    s = suite_create("atan");
-    tc_core = tcase_create("Core");
-
-    tcase_add_test(tc_core, s21_atanClassic);
-    tcase_add_test(tc_core, s21_atanLesszero);
-    tcase_add_test(tc_core, s21_atanZero);
-    tcase_add_test(tc_core, s21_atanBig);
-    tcase_add_test(tc_core, s21_atanLow);
-    suite_add_tcase(s, tc_core);
-
-    return s;
-}
 
 Suite* abs_suite(void) {
     Suite* s;
@@ -637,38 +488,6 @@ Suite* fabs_suite(void) {
     return s;
 }
 
-Suite* sqrt_suite(void) {
-    Suite* s;
-    TCase* tc_core;
-
-    s = suite_create("sqrt");
-    tc_core = tcase_create("Core");
-
-    tcase_add_test(tc_core, s21_sqrtZero);
-    tcase_add_test(tc_core, s21_sqrtBig);
-    tcase_add_test(tc_core, s21_sqrtClassic);
-    tcase_add_test(tc_core, s21_sqrtLessZero);
-    suite_add_tcase(s, tc_core);
-
-    return s;
-}
-
-Suite* ceil_suite(void) {
-    Suite* s;
-    TCase* tc_core;
-
-    s = suite_create("ceil");
-    tc_core = tcase_create("Core");
-
-    tcase_add_test(tc_core, s21_ceilClassic);
-    tcase_add_test(tc_core, s21_ceilBig);
-    tcase_add_test(tc_core, s21_ceilZero);
-    tcase_add_test(tc_core, s21_ceil_negative);
-    tcase_add_test(tc_core, s21_ceil_positive);
-    suite_add_tcase(s, tc_core);
-
-    return s;
-}
 
 Suite* fmod_suite(void) {
     Suite* s;
@@ -688,24 +507,6 @@ Suite* fmod_suite(void) {
     return s;
 }
 
-// Suite* acos_suite(void) {
-//     Suite* s;
-//     TCase* tc_core;
-// 
-//     s = suite_create("acos");
-//     tc_core = tcase_create("Core");
-// 
-//     tcase_add_test(tc_core, s21_acos_too_negative);
-//     tcase_add_test(tc_core, s21_acos_negative);
-//     tcase_add_test(tc_core, s21_acos_zero);
-//     tcase_add_test(tc_core, s21_acos_positive);
-//     tcase_add_test(tc_core, s21_acos_too_positive);
-// 
-//     suite_add_tcase(s, tc_core);
-// 
-//     return s;
-// }
-// 
 Suite* sin_suite(void) {
     Suite* s;
     TCase* tc_core;
