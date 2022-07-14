@@ -15,7 +15,7 @@ s21_math.a: clean_lib $(MATH_FUNC)
 	ranlib 	s21_math.a
 
 test: clean_bin s21_math.a 
-	$(CC) $(LFLAGS) tests/acos.c s21_math.a $(MATH_TEST) -o test
+	$(CC) $(LFLAGS) tests/test_s21_acos.c s21_math.a $(MATH_TEST) -o test
 	- ./test
 
 gcov_report: clean $(MATH_FUNC)
