@@ -17,7 +17,7 @@ s21_math.a: clean_lib $(MATH_FUNC)
 	ranlib 	s21_math.a
 
 test: clean_bin s21_math.a 
-	$(CC) $(LFLAGS) $(TEST_FUNC) s21_math.a $(MATH_TEST) -o test
+	$(CC) $(CFLAGS) $(LFLAGS) $(TEST_FUNC) s21_math.a $(MATH_TEST) -o test
 	- ./test
 
 gcov_report: clean $(MATH_FUNC)
@@ -51,6 +51,6 @@ ifeq ("","$(wildcard ./CPPLINT.cfg)")
 endif
 	@!(python3 ../materials/linters/cpplint.py --extensions=c $^ | grep -q :)
 	rm -f CPPLINT.cfg
-	!(grep '<math.h>' s21*)
+	!(grep -r '<math.h>' s21*)
 
 

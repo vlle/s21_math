@@ -75,6 +75,7 @@ Suite* pow_suite(void) {
     tcase_add_test(tc_core, s21_powClassic);
     tcase_add_test(tc_core, s21_powUnusual);
     tcase_add_test(tc_core, s21_powZero);
+    tcase_add_test(tc_core, s21_powLesszero);
     tcase_add_test(tc_core, s21_powZeroBase);
     tcase_add_test(tc_core, s21_powLessZero);
     tcase_add_test(tc_core, s21_powDouble1);

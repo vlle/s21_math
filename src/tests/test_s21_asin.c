@@ -45,3 +45,23 @@ START_TEST(s21_asinMoreOne) {
     ck_assert_ldouble_nan(a2);
     ck_assert_ldouble_nan(b2);
 } END_TEST
+
+Suite* asin_suite(void) {
+    Suite* s;
+    TCase* tc_core;
+
+    s = suite_create("asin");
+    tc_core = tcase_create("Core");
+
+    tcase_add_test(tc_core, s21_asinClassic);
+    tcase_add_test(tc_core, s21_asinZero);
+    tcase_add_test(tc_core, s21_asinBelowZero);
+    tcase_add_test(tc_core, s21_asinPi);
+    tcase_add_test(tc_core, s21_asinPi2);
+    tcase_add_test(tc_core, s21_asinMoreOne);
+
+    suite_add_tcase(s, tc_core);
+
+    return s;
+}
+
