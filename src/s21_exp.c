@@ -26,7 +26,7 @@ long double s21_exp(double x) {
                 a *= q / i;
                 s += a;
                 i++;
-            } while (s21_fabs(a) >= 1e-07 / y);
+            } while (s21_fabs(a) >= 1e-20/ y);
             y *= s;
         }
     }
