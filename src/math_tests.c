@@ -363,14 +363,17 @@ START_TEST(s21_floorInf) {
     double x = S21_INF;
     long double a2 = floor(x);
     long double b2 = s21_floor(x);
-    ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
+    // ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
+    ck_assert_ldouble_infinite(a2);
+    ck_assert_ldouble_infinite(b2);
 } END_TEST
 
 START_TEST(s21_floorNan) {
     double x = S21_NAN;
     long double a2 = floor(x);
     long double b2 = s21_floor(x);
-    ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
+    ck_assert_ldouble_nan(a2);
+    ck_assert_ldouble_nan(b2);
 } END_TEST
 
 START_TEST(s21_floorClassic) {
