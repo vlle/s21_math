@@ -26,7 +26,8 @@ START_TEST(s21_sqrtLessZero) {
     double y = -123112.412;
     long double my_ans = s21_sqrt(y);
     long double true_ans = sqrt(y);
-    ck_assert_ldouble_eq_tol(my_ans, true_ans, 1e-7);
+    ck_assert_ldouble_nan(my_ans);
+    ck_assert_ldouble_nan(true_ans);
 } END_TEST
 
 
