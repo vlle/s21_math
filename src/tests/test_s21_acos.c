@@ -29,6 +29,13 @@ START_TEST(s21_acos_positive) {
     ck_assert_ldouble_eq_tol(my_ans, true_ans, 1e-7);
 } END_TEST
 
+START_TEST(s21_acos_minusone) {
+    double x = -1.0;
+    long double my_ans = s21_acos(x);
+    long double true_ans = acos(x);
+    ck_assert_ldouble_eq_tol(my_ans, true_ans, 1e-7);
+} END_TEST
+
 START_TEST(s21_acos_too_positive) {
     double x = 5.64278;
     long double my_ans = s21_acos(x);
@@ -49,6 +56,7 @@ Suite* acos_suite(void) {
     tcase_add_test(tc_core, s21_acos_negative);
     tcase_add_test(tc_core, s21_acos_zero);
     tcase_add_test(tc_core, s21_acos_positive);
+    tcase_add_test(tc_core, s21_acos_minusone);
     tcase_add_test(tc_core, s21_acos_too_positive);
 
     suite_add_tcase(s, tc_core);
