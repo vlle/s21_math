@@ -1,6 +1,4 @@
 #include "s21_math.h"
-#include <math.h>
-#include <stdio.h>
 
 
 long double s21_pow(double base, double exps) {

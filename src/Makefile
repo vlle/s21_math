@@ -45,11 +45,11 @@ clean_lib:
 clean_bin:
 		rm -f test
 
-cpplint: ${MATH_FUNC} ${MATH_TEST} *.h
+cpplint: ${MATH_FUNC} ${MATH_TEST} ${TEST_FUNC} *.h
 ifeq ("","$(wildcard ./CPPLINT.cfg)")
 	cp -f ../materials/linters/CPPLINT.cfg ./CPPLINT.cfg
 endif
-	!(python3 ../materials/linters/cpplint.py --extensions=c $^ | grep -q :)
+	@!(python3 ../materials/linters/cpplint.py --extensions=c $^ | grep -q :)
 	rm -f CPPLINT.cfg
 	!(grep '<math.h>' s21*)
 

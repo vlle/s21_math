@@ -11,5 +11,11 @@ Suite* fmod_suite(void);
 Suite* fabs_suite(void);
 Suite* sin_suite(void);
 Suite* tan_suite(void);
+Suite* pow_suite(void);
+Suite* abs_suite(void);
+Suite* cos_suite(void);
+Suite* exp_suite(void);
+Suite* log_suite(void);
+Suite* floor_suite(void);
 
 #endif  // SRC_TESTS_S21_MATH_TESTS_H
