@@ -1,13 +1,13 @@
-CC:= gcc
-CFLAGS:=-Wall -Werror -Wextra -std=c11 -pedantic
-LFLAGS:= $(shell pkg-config --cflags --libs check)
-SANITIZER:= #-fsanitize=address
-CFLAGS_TEST:= $(SANITIZER) --coverage -c -g 
-MATH_FUNC:=s21*.c
-MATH_OBJ:=s21*.o
-TEST_DIR:= tests
-TEST_FUNC:= $(wildcard $(TEST_DIR)/test_s21*.c)
-MATH_TEST:= math_tests.c
+CC          := gcc
+CFLAGS      := -Wall -Werror -Wextra -std=c11 -pedantic
+LFLAGS      := $(shell pkg-config --cflags --libs check)
+SANITIZER   := #-fsanitize=address
+CFLAGS_TEST := $(SANITIZER) --coverage -c -g
+MATH_FUNC   := s21*.c
+MATH_OBJ    := s21*.o
+TEST_DIR    := tests
+TEST_FUNC   := $(wildcard $(TEST_DIR)/test_s21*.c)
+MATH_TEST   := math_tests.c
 
 all: s21_math.a test clean cpplint
 
@@ -21,10 +21,10 @@ test: clean_bin s21_math.a
 	- ./test
 
 gcov_report: clean $(MATH_FUNC)
-	$(CC) $(CFLAGS_TEST) $(MATH_FUNC)
+	$(CC) $(CFLAGS_TEST) -c $(MATH_FUNC)
 	ar rc s21_math.a $(MATH_OBJ)
 	ranlib 	s21_math.a
-	- $(CC) $(LFLAGS) --coverage s21_math.a $(MATH_TEST) -o test
+	- $(CC) $(LFLAGS) --coverage $(TEST_FUNC) s21_math.a $(MATH_TEST) -o test
 	- ./test
 	./../materials/lcov/bin/lcov -f -c --directory . -o ./coverage.info 
 	./../materials/lcov/bin/genhtml coverage.info --output-directory=res
