@@ -1,17 +1,8 @@
 #include "s21_math.h"
 
 long double s21_log(double x) {
-    // double alpha = (x-1)/(x+1), ans = alpha;
-    // double save = ans * alpha * alpha;
-
-    // for (register int i = 2 ; i <= 10000 ; i++) {
-    //     ans += (1.0/(2*i-1)) * save;
-    //     save = save * alpha * alpha;
-    // }
-
-//     return (2.0 * ans);
     int ex_pow = 0;
-    double result = 0, compare = result;
+    long double result = 0, compare = result;
 
     for (; x >= S21_EXP; x /= S21_EXP, ex_pow++) continue;
 
