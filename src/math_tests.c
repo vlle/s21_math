@@ -5,7 +5,6 @@
 #include "tests/s21_math_test.h"
 #include "s21_math.h"
 
-
 int main() {
     int no_failed = 0;
     Suite *a, *b, *c, *d, *e, *f, *g, *h, *m, *l,  *n,  *j, *z, *t;

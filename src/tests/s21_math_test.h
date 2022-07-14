@@ -17,5 +17,6 @@ Suite* cos_suite(void);
 Suite* exp_suite(void);
 Suite* log_suite(void);
 Suite* floor_suite(void);
+Suite* asin_suite(void);
 
 #endif  // SRC_TESTS_S21_MATH_TESTS_H
