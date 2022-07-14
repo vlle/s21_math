@@ -7,7 +7,7 @@
 
 int main() {
     int no_failed = 0;
-    Suite *a, *b, *c, *d, *e, *f, *g, *h, *m, *l,  *n,  *j, *z, *t;
+    Suite *a, *b, *c, *d, *e, *f, *g, *h, *m, *l,  *n,  *j, *z, *t, *t1;
     SRunner* runner;
     a = floor_suite();
     b = tan_suite();
@@ -24,6 +24,7 @@ int main() {
     j = sin_suite();
     z = cos_suite();
     t = exp_suite();
+    t1 = sqrt_suite();
     n = log_suite();
 
     runner = srunner_create(a);
@@ -40,6 +41,7 @@ int main() {
     srunner_add_suite(runner, j);
     srunner_add_suite(runner, z);
     srunner_add_suite(runner, t);
+    srunner_add_suite(runner, t1);
     srunner_run_all(runner, CK_NORMAL);
     no_failed = srunner_ntests_failed(runner);
     srunner_free(runner);
