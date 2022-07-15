@@ -36,6 +36,20 @@ START_TEST(s21_ceil_positive) {
     ck_assert_ldouble_eq_tol(my_ans, true_ans, 1e-7);
 } END_TEST
 
+START_TEST(s21_ceilNan) {
+    double y = S21_NAN;
+    long double my_ans = s21_ceil(y);
+    long double true_ans = ceil(y);
+    ck_assert(my_ans == true_ans);
+} END_TEST
+
+START_TEST(s21_ceilInf) {
+    double y = S21_INF;
+    long double my_ans = s21_ceil(y);
+    long double true_ans = ceil(y);
+    ck_assert(my_ans == true_ans);
+} END_TEST
+
 Suite* ceil_suite(void) {
     Suite* s;
     TCase* tc_core;
@@ -48,6 +62,8 @@ Suite* ceil_suite(void) {
     tcase_add_test(tc_core, s21_ceilZero);
     tcase_add_test(tc_core, s21_ceil_negative);
     tcase_add_test(tc_core, s21_ceil_positive);
+    tcase_add_test(tc_core, s21_ceilInf);
+    tcase_add_test(tc_core, s21_ceilNan);
     suite_add_tcase(s, tc_core);
 
     return s;

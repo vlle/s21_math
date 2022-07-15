@@ -30,6 +30,19 @@ START_TEST(s21_sqrtLessZero) {
     ck_assert_ldouble_nan(true_ans);
 } END_TEST
 
+START_TEST(s21_sqrtNan) {
+    double y = S21_NAN;
+    long double my_ans = s21_sqrt(y);
+    long double true_ans = sqrt(y);
+    ck_assert(my_ans == true_ans);
+} END_TEST
+
+START_TEST(s21_sqrtInf) {
+    double y = S21_INF;
+    long double my_ans = s21_sqrt(y);
+    long double true_ans = sqrt(y);
+    ck_assert(my_ans == true_ans);
+} END_TEST
 
 Suite* sqrt_suite(void) {
     Suite* s;
@@ -42,6 +55,8 @@ Suite* sqrt_suite(void) {
     tcase_add_test(tc_core, s21_sqrtBig);
     tcase_add_test(tc_core, s21_sqrtClassic);
     tcase_add_test(tc_core, s21_sqrtLessZero);
+    tcase_add_test(tc_core, s21_sqrtInf);
+    tcase_add_test(tc_core, s21_sqrtNan);
     suite_add_tcase(s, tc_core);
 
     return s;

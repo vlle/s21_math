@@ -29,6 +29,20 @@ START_TEST(s21_sinBelowZero) {
     ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
 } END_TEST
 
+START_TEST(s21_sinNan) {
+    double y = S21_NAN;
+    long double my_ans = s21_sin(y);
+    long double true_ans = sin(y);
+    ck_assert(my_ans == true_ans);
+} END_TEST
+
+START_TEST(s21_sinInf) {
+    double y = S21_INF;
+    long double my_ans = s21_sin(y);
+    long double true_ans = sin(y);
+    ck_assert(my_ans == true_ans);
+} END_TEST
+
 Suite* sin_suite(void) {
     Suite* s;
     TCase* tc_core;
@@ -38,6 +52,8 @@ Suite* sin_suite(void) {
     tcase_add_test(tc_core, s21_sinClassic);
     tcase_add_test(tc_core, s21_sinZero);
     tcase_add_test(tc_core, s21_sinBelowZero);
+    tcase_add_test(tc_core, s21_sinInf);
+    tcase_add_test(tc_core, s21_sinNan);
     tcase_add_test(tc_core, s21_sinBelowZeroMuch);
 
     suite_add_tcase(s, tc_core);
