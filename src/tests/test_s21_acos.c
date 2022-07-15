@@ -29,6 +29,7 @@ START_TEST(s21_acos_positive) {
     ck_assert_ldouble_eq_tol(my_ans, true_ans, 1e-7);
 } END_TEST
 
+
 START_TEST(s21_acos_minusone) {
     double x = -1.0;
     long double my_ans = s21_acos(x);
@@ -44,6 +45,22 @@ START_TEST(s21_acos_too_positive) {
     ck_assert_ldouble_nan(true_ans);
 } END_TEST
 
+START_TEST(s21_acosInf) {
+    double x = S21_INF;
+    long double my_ans = s21_acos(x);
+    long double true_ans = acos(x);
+    ck_assert_ldouble_nan(true_ans);
+    ck_assert_ldouble_nan(my_ans);
+} END_TEST
+
+START_TEST(s21_acosNan) {
+    int y = S21_NAN;
+    long double my_ans = s21_acos(y);
+    long double true_ans = acos(y);
+    ck_assert_ldouble_nan(my_ans);
+    ck_assert_ldouble_nan(true_ans);
+} END_TEST
+
 
 Suite* acos_suite(void) {
     Suite* s;
@@ -54,6 +71,8 @@ Suite* acos_suite(void) {
 
     tcase_add_test(tc_core, s21_acos_too_negative);
     tcase_add_test(tc_core, s21_acos_negative);
+    tcase_add_test(tc_core, s21_acosNan);
+    tcase_add_test(tc_core, s21_acosInf);
     tcase_add_test(tc_core, s21_acos_zero);
     tcase_add_test(tc_core, s21_acos_positive);
     tcase_add_test(tc_core, s21_acos_minusone);
