@@ -36,6 +36,20 @@ START_TEST(s21_atanClassic) {
     ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
 } END_TEST
 
+START_TEST(s21_atanNan) {
+    double x = S21_NAN;
+    long double a2 = atan(x);
+    long double b2 = s21_atan(x);
+    ck_assert(a2 == b2);
+} END_TEST
+
+START_TEST(s21_atanInf) {
+    double x = S21_INF;
+    long double a2 = atan(x);
+    long double b2 = s21_atan(x);
+    ck_assert(a2 == b2);
+} END_TEST
+
 Suite* atan_suite(void) {
     Suite* s;
     TCase* tc_core;
@@ -46,6 +60,8 @@ Suite* atan_suite(void) {
     tcase_add_test(tc_core, s21_atanClassic);
     tcase_add_test(tc_core, s21_atanLesszero);
     tcase_add_test(tc_core, s21_atanZero);
+    tcase_add_test(tc_core, s21_atanInf);
+    tcase_add_test(tc_core, s21_atanNan);
     tcase_add_test(tc_core, s21_atanBig);
     tcase_add_test(tc_core, s21_atanLow);
     suite_add_tcase(s, tc_core);
