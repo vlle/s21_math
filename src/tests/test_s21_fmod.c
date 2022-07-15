@@ -42,6 +42,20 @@ START_TEST(s21_fmod_one_negative) {
     ck_assert_ldouble_eq_tol(my_ans, true_ans, 1e-7);
 } END_TEST
 
+START_TEST(s21_fmodNan) {
+    double y = S21_NAN;
+    long double my_ans = s21_fmod(y, 2);
+    long double true_ans = fmod(y, 2);
+    ck_assert(my_ans == true_ans);
+} END_TEST
+
+START_TEST(s21_fmodInf) {
+    double y = S21_INF;
+    long double my_ans = s21_fmod(y, 2);
+    long double true_ans = fmod(y, 2);
+    ck_assert(my_ans == true_ans);
+} END_TEST
+
 Suite* fmod_suite(void) {
     Suite* s;
     TCase* tc_core;
@@ -54,6 +68,8 @@ Suite* fmod_suite(void) {
     tcase_add_test(tc_core, s21_fmod_one_positive);
     tcase_add_test(tc_core, s21_fmod_one_negative);
     tcase_add_test(tc_core, s21_fmod_zero_division);
+    tcase_add_test(tc_core, s21_fmodNan);
+    tcase_add_test(tc_core, s21_fmodInf);
 
     suite_add_tcase(s, tc_core);
 

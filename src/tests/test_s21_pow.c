@@ -65,6 +65,20 @@ START_TEST(s21_powLesszero) {
     ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
 } END_TEST
 
+START_TEST(s21_powNan) {
+    double y = S21_NAN;
+    long double my_ans = s21_pow(y, 0);
+    long double true_ans = pow(y, 0);
+    ck_assert(my_ans == true_ans);
+} END_TEST
+
+START_TEST(s21_powInf) {
+    double y = S21_INF;
+    long double my_ans = s21_pow(y, 1);
+    long double true_ans = pow(y, 1);
+    ck_assert(my_ans == true_ans);
+} END_TEST
+
 Suite* pow_suite(void) {
     Suite* s;
     TCase* tc_core;
@@ -75,6 +89,8 @@ Suite* pow_suite(void) {
     tcase_add_test(tc_core, s21_powClassic);
     tcase_add_test(tc_core, s21_powUnusual);
     tcase_add_test(tc_core, s21_powZero);
+    tcase_add_test(tc_core, s21_powInf);
+    tcase_add_test(tc_core, s21_powNan);
     tcase_add_test(tc_core, s21_powLesszero);
     tcase_add_test(tc_core, s21_powZeroBase);
     tcase_add_test(tc_core, s21_powLessZero);

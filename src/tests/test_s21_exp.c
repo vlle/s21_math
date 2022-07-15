@@ -36,6 +36,20 @@ START_TEST(s21_expBelowzero) {
     ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
 } END_TEST
 
+START_TEST(s21_expNan) {
+    double x = S21_NAN;
+    long double a2 = exp(x);
+    long double b2 = s21_exp(x);
+    ck_assert(a2 == b2);
+} END_TEST
+
+START_TEST(s21_expInf) {
+    double x = S21_INF;
+    long double a2 = exp(x);
+    long double b2 = s21_exp(x);
+    ck_assert(a2 == b2);
+} END_TEST
+
 Suite* exp_suite(void) {
     Suite* s;
     TCase* tc_core;
@@ -47,6 +61,8 @@ Suite* exp_suite(void) {
     tcase_add_test(tc_core, s21_expLow);
     tcase_add_test(tc_core, s21_expZero);
     tcase_add_test(tc_core, s21_expBelowzero);
+    tcase_add_test(tc_core, s21_expNan);
+    tcase_add_test(tc_core, s21_expInf);
 
     suite_add_tcase(s, tc_core);
 
