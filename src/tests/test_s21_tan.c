@@ -9,7 +9,7 @@ START_TEST(s21_tanClassic) {
 } END_TEST
 
 START_TEST(s21_tanMorezero) {
-    double x = 12.56;
+    double x = 2.56;
     long double a2 = tan(x);
     long double b2 = s21_tan(x);
     ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
