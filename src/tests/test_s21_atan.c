@@ -40,14 +40,15 @@ START_TEST(s21_atanNan) {
     double x = S21_NAN;
     long double a2 = atan(x);
     long double b2 = s21_atan(x);
-    ck_assert(a2 == b2);
+    ck_assert_ldouble_nan(a2);
+    ck_assert_ldouble_nan(b2);
 } END_TEST
 
 START_TEST(s21_atanInf) {
     double x = S21_INF;
     long double a2 = atan(x);
     long double b2 = s21_atan(x);
-    ck_assert(a2 == b2);
+    ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
 } END_TEST
 
 Suite* atan_suite(void) {
