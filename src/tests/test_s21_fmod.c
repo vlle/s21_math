@@ -46,14 +46,16 @@ START_TEST(s21_fmodNan) {
     double y = S21_NAN;
     long double my_ans = s21_fmod(y, 2);
     long double true_ans = fmod(y, 2);
-    ck_assert(my_ans == true_ans);
+    ck_assert_ldouble_nan(true_ans);
+    ck_assert_ldouble_nan(my_ans);
 } END_TEST
 
 START_TEST(s21_fmodInf) {
     double y = S21_INF;
     long double my_ans = s21_fmod(y, 2);
     long double true_ans = fmod(y, 2);
-    ck_assert(my_ans == true_ans);
+    ck_assert_ldouble_nan(true_ans);
+    ck_assert_ldouble_nan(my_ans);
 } END_TEST
 
 Suite* fmod_suite(void) {
