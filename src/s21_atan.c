@@ -3,7 +3,7 @@
 long double s21_atan(double x) {
     long double s21_atan = 0;
     if (is_nan(x)) return S21_NAN;
-    if (x == S21_INF || x == -S21_INF) { 
+    if (x == S21_INF || x == -S21_INF) {
         s21_atan = x < 0 ? -S21_PI / 2 : S21_PI / 2;
     } else if (-1. < x && x < 1.) {
         for (register int i = 0; i < 500; i++) {
