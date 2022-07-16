@@ -40,14 +40,16 @@ START_TEST(s21_ceilNan) {
     double y = S21_NAN;
     long double my_ans = s21_ceil(y);
     long double true_ans = ceil(y);
-    ck_assert(my_ans == true_ans);
+    ck_assert_ldouble_nan(my_ans);
+    ck_assert_ldouble_nan(true_ans);
 } END_TEST
 
 START_TEST(s21_ceilInf) {
     double y = S21_INF;
     long double my_ans = s21_ceil(y);
     long double true_ans = ceil(y);
-    ck_assert(my_ans == true_ans);
+    ck_assert_ldouble_infinite(my_ans);
+    ck_assert_ldouble_infinite(true_ans);
 } END_TEST
 
 Suite* ceil_suite(void) {
