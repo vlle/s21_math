@@ -40,14 +40,16 @@ START_TEST(s21_cosNan) {
     double x = S21_NAN;
     long double a2 = cos(x);
     long double b2 = s21_cos(x);
-    ck_assert(a2 == b2);
+    ck_assert_ldouble_nan(a2);
+    ck_assert_ldouble_nan(b2);
 } END_TEST
 
 START_TEST(s21_cosInf) {
     double x = S21_INF;
     long double a2 = cos(x);
     long double b2 = s21_cos(x);
-    ck_assert(a2 == b2);
+    ck_assert_ldouble_nan(a2);
+    ck_assert_ldouble_nan(b2);
 } END_TEST
 
 Suite* cos_suite(void) {
