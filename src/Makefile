@@ -1,7 +1,9 @@
 CC          := gcc
 WARNINGS    := -Wall -Werror -Wextra 
 CFLAGS      := -std=c11 -pedantic $(WARNINGS)
-LFLAGS      := $(shell pkg-config --cflags --libs check)
+INC_CHECK   := $(shell pkg-config --cflags check)
+LFLAGS      := $(shell pkg-config --cflags --libs check) 
+LFLAGS -= -lcheck
 TEST_FLAGS  := --coverage -c -g
 
 OBJ_DIR     := obj
@@ -34,11 +36,11 @@ $(OBJ_DIR)/%.o: %.c
 
 $(TEST_OBJ_DIR)/main.o: $(MATH_TEST) 
 	@mkdir -p $(TEST_OBJ_DIR)
-	$(CC) $(CFLAGS) $(LFLAGS) -c -o $(TEST_OBJ_DIR)/main.o $(MATH_TEST)
+	$(CC)  $(INC_CHECK) -c -o $(TEST_OBJ_DIR)/main.o $(MATH_TEST)
 
 $(TEST_OBJ_DIR)/%.o: $(TEST_SRC_DIR)/%.c
 	@mkdir -p $(TEST_OBJ_DIR)
-	$(CC) $(CFLAGS) $(LFLAGS) -c $^ -o $@
+	$(CC) $(INC_CHECK) -c $^ -o $@
 
 
 gcov_report: $(TEST_OBJ_DIR)/main.o $(GCOV_OBJ) $(MATH_SRC)
