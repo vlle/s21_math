@@ -10,10 +10,9 @@ START_TEST(s21_expClassic) {
 
 START_TEST(s21_expBig) {
     double x = 3132;
-    long double a2 = exp(x);
+    long double a2 = expl(x);
     long double b2 = s21_exp(x);
-    ck_assert_ldouble_infinite(a2);
-    ck_assert_ldouble_infinite(b2);
+    ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
 } END_TEST
 
 START_TEST(s21_expLow) {

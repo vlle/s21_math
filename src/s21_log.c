@@ -3,14 +3,12 @@
 long double s21_log(double x) {
     int ex_pow = 0;
     long double result = 0, compare = result;
-    if (x < 0) {
+    if ((x < 0) || (is_nan(x))){
         return S21_NAN;
     } else if (x == 0) {
         return -S21_INF;
     } else if ((is_inf(x))) {
         return S21_INF;
-    } else if ((is_nan(x))) {
-        return S21_NAN;
     }
     for (; x >= S21_EXP; x /= S21_EXP, ex_pow++) continue;
 

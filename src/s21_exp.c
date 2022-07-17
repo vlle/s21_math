@@ -3,7 +3,11 @@
 long double s21_exp(double x) {
     long double y, q, ex, s, a;
     int i, p;
-    if (is_inf(x)) return S21_INF;
+    if (is_inf(x)) {
+        return S21_INF;
+    } else if (is_nan(x)) {
+        return S21_NAN;
+    }
     p = s21_floor(x);  //  Выделение целой части х - p
     q = x - p;          //  Выделение дробной части х - q
     ex = S21_EXP;
