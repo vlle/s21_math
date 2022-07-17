@@ -1,25 +1,43 @@
 CC          := gcc
-CFLAGS      := -Wall -Werror -Wextra -std=c11 -pedantic
+WARNINGS    := -Wall -Werror -Wextra 
+CFLAGS      := -std=c11 -pedantic $(WARNINGS)
 LFLAGS      := $(shell pkg-config --cflags --libs check)
-TEST_FLAGS := --coverage -c -g
-MATH_FUNC   := s21*.c
-MATH_OBJ    := s21*.o
-TEST_DIR    := tests
-TEST_FUNC   := $(wildcard $(TEST_DIR)/test_s21*.c)
-MATH_TEST   := math_tests.c
+TEST_FLAGS  := --coverage -c -g
 
-all: s21_math.a test clean cpplint
+OBJ_DIR     := obj
+TEST_SRC_DIR:= tests
+TEST_OBJ_DIR:= tests_obj
 
-s21_math.a: clean_lib $(MATH_FUNC)
-	$(CC) $(CFLAGS) -c $(MATH_FUNC)
+TEST_SRC  := $(shell find $(TEST_SRC_DIR) -maxdepth 1 -name "*.c")
+MATH_SRC  := $(wildcard s21*.c)
+
+TEST_OBJ  := $(addprefix $(TEST_OBJ_DIR)/, $(notdir $(TEST_SRC:.c=.o)))
+MATH_OBJ  := $(addprefix $(OBJ_DIR)/, $(patsubst %.c, %.o, $(MATH_SRC)))
+MATH_TEST := math_tests.c
+
+all: test clean cpplint
+
+test: s21_math.a $(TEST_OBJ_DIR)/main.o $(TEST_OBJ)
+	@$(CC) $(LFLAGS) $(TEST_OBJ) $(TEST_OBJ_DIR)/main.o s21_math.a -o test
+	- ./test
+
+s21_math.a: $(MATH_OBJ)
 	ar rc s21_math.a $(MATH_OBJ)
 	ranlib 	s21_math.a
 
-test: clean_bin s21_math.a 
-	$(CC) $(LFLAGS) $(TEST_FUNC) s21_math.a $(MATH_TEST) -o test
-	- ./test
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) -c $^ -o $@
 
-gcov_report: clean $(MATH_FUNC)
+$(TEST_OBJ_DIR)/main.o: $(MATH_TEST) 
+	@mkdir -p $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) $(LFLAGS) -c -o $(TEST_OBJ_DIR)/main.o $(MATH_TEST)
+
+$(TEST_OBJ_DIR)/%.o: $(TEST_SRC_DIR)/%.c
+	@mkdir -p $(TEST_OBJ_DIR)
+	$(CC) $(LFLAGS) -c $^ -o $@
+
+gcov_report: $(MATH_FUNC)
 	$(CC) $(TEST_FLAGS) $(MATH_FUNC)
 	ar rc s21_math.a $(MATH_OBJ)
 	ranlib 	s21_math.a
@@ -31,20 +49,21 @@ gcov_report: clean $(MATH_FUNC)
 	open res/index.html
 
 
+.PHONY: clean clean_lib clean_bin
 clean: 
 	rm -f *.gcda 
 	rm -f *.gcov 
-	rm -f *.o 
 	rm -f *.gcno 
 	rm -f coverage.info
+	rm -f test
 
 clean_lib:
 	rm -f s21_math.a
 
 clean_bin:
-		rm -f test
+	rm -f $(MATH_OBJ) 
 
-cpplint: ${MATH_FUNC} ${MATH_TEST} ${TEST_FUNC} *.h
+cpplint: ${MATH_SRC} ${TEST_SRC} *.h
 ifeq ("","$(wildcard ./CPPLINT.cfg)")
 	cp -f ../materials/linters/CPPLINT.cfg ./CPPLINT.cfg
 endif
