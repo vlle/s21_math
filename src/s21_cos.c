@@ -2,7 +2,7 @@
 
 long double s21_cos(double x) {
     long double s21_cos = 0;
-    if (is_inf(x)) return S21_NAN;
+    if ((is_nan(x)) || (is_inf(x))) return S21_NAN;
     while (x > 2 * S21_PI || x < -2 * S21_PI) {
         if (x > 2 * S21_PI) {
             x = x - 2 * S21_PI;
