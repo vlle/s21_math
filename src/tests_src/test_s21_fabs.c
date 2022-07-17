@@ -26,7 +26,8 @@ START_TEST(s21_fabsNan) {
     double y = S21_NAN;
     long double my_ans = s21_fabs(y);
     long double true_ans = fabs(y);
-    ck_assert(my_ans == true_ans);
+    ck_assert_ldouble_nan(my_ans);
+    ck_assert_ldouble_nan(true_ans);
 } END_TEST
 
 START_TEST(s21_fabsInf) {
