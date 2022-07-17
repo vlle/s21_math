@@ -21,7 +21,7 @@ MATH_TEST := math_tests.c
 all: cpplint test 
 
 test: s21_math.a $(TEST_OBJ_DIR)/main.o $(TEST_OBJ)
-	@$(CC) $(LFLAGS) $(TEST_OBJ) $(TEST_OBJ_DIR)/main.o s21_math.a -o test
+	$(CC) $(LFLAGS) $(TEST_OBJ) $(TEST_OBJ_DIR)/main.o s21_math.a -o test
 	- ./test
 
 s21_math.a: $(MATH_OBJ)
