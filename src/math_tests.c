@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-#include "tests/s21_math_test.h"
+#include "tests_src/s21_math_test.h"
 #include "s21_math.h"
 
 int main() {

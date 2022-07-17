@@ -5,7 +5,7 @@ LFLAGS      := $(shell pkg-config --cflags --libs check)
 TEST_FLAGS  := --coverage -c -g
 
 OBJ_DIR     := obj
-TEST_SRC_DIR:= tests
+TEST_SRC_DIR:= tests_src
 TEST_OBJ_DIR:= tests_obj
 GCOV_OBJ_DIR:= gcov_res
 
@@ -18,7 +18,7 @@ GCOV_OBJ  := $(addprefix $(GCOV_OBJ_DIR)/, $(patsubst %.c, %.o, $(MATH_SRC)))
 
 MATH_TEST := math_tests.c
 
-all: cpplint test clean 
+all: cpplint test 
 
 test: s21_math.a $(TEST_OBJ_DIR)/main.o $(TEST_OBJ)
 	@$(CC) $(LFLAGS) $(TEST_OBJ) $(TEST_OBJ_DIR)/main.o s21_math.a -o test
@@ -41,10 +41,10 @@ $(TEST_OBJ_DIR)/%.o: $(TEST_SRC_DIR)/%.c
 	$(CC) $(CFLAGS) $(LFLAGS) -c $^ -o $@
 
 
-gcov_report: $(GCOV_OBJ) $(MATH_SRC)
+gcov_report: $(TEST_OBJ_DIR)/main.o $(GCOV_OBJ) $(MATH_SRC)
 	ar rc s21_math.a $(GCOV_OBJ)
 	ranlib 	s21_math.a
-	- $(CC) $(LFLAGS) --coverage $(TEST_SRC) s21_math.a $(MATH_TEST) -o test
+	$(CC) $(LFLAGS) --coverage $(TEST_OBJ) $(TEST_OBJ_DIR)/main.o s21_math.a -o test
 	- ./test
 	./../materials/lcov/bin/lcov -f -c --directory . -o ./coverage.info 
 	./../materials/lcov/bin/genhtml coverage.info --output-directory=res
@@ -67,9 +67,10 @@ clean:
 clean_lib:
 	rm -f s21_math.a
 
-clean_bin:
+clean_bin: 
 	rm -f $(MATH_OBJ) 
 	rm -f $(TEST_OBJ) 
+	rm -f $(GCOV_OBJ) 
 
 rebuild: clean clean_lib clean_bin all
 
