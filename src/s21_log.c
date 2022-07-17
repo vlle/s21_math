@@ -9,6 +9,8 @@ long double s21_log(double x) {
         return -S21_INF;
     } else if ((is_inf(x))) {
         return S21_INF;
+    } else if ((is_nan(x))) {
+        return S21_NAN;
     }
     for (; x >= S21_EXP; x /= S21_EXP, ex_pow++) continue;
 
