@@ -1,8 +1,7 @@
 CC          := gcc
 CFLAGS      := -Wall -Werror -Wextra -std=c11 -pedantic
 LFLAGS      := $(shell pkg-config --cflags --libs check)
-SANITIZER   := #-fsanitize=address
-CFLAGS_TEST := $(SANITIZER) --coverage -c -g
+TEST_FLAGS := --coverage -c -g
 MATH_FUNC   := s21*.c
 MATH_OBJ    := s21*.o
 TEST_DIR    := tests
@@ -17,11 +16,11 @@ s21_math.a: clean_lib $(MATH_FUNC)
 	ranlib 	s21_math.a
 
 test: clean_bin s21_math.a 
-	$(CC) $(CFLAGS) $(LFLAGS) $(TEST_FUNC) s21_math.a $(MATH_TEST) -o test
+	$(CC) $(LFLAGS) $(TEST_FUNC) s21_math.a $(MATH_TEST) -o test
 	- ./test
 
 gcov_report: clean $(MATH_FUNC)
-	$(CC) $(CFLAGS_TEST) -c $(MATH_FUNC)
+	$(CC) $(TEST_FLAGS) $(MATH_FUNC)
 	ar rc s21_math.a $(MATH_OBJ)
 	ranlib 	s21_math.a
 	- $(CC) $(LFLAGS) --coverage $(TEST_FUNC) s21_math.a $(MATH_TEST) -o test
