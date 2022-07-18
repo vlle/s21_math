@@ -10,7 +10,7 @@ START_TEST(s21_powClassic) {
 } END_TEST
 
 START_TEST(s21_powUnusual) {
-    double x = 4412441.0;
+    double x = 441.0;
     double base = 3;
     long double a2 = pow(x, base);
     long double b2 = s21_pow(x, base);
@@ -26,7 +26,7 @@ START_TEST(s21_powLessZero) {
 } END_TEST
 
 START_TEST(s21_powDouble1) {
-    double x = 1010.312;
+    double x = 100.312;
     double base = 3;
     long double a2 = pow(x, base);
     long double b2 = s21_pow(x, base);
@@ -58,7 +58,7 @@ START_TEST(s21_powZero) {
 } END_TEST
 
 START_TEST(s21_powLesszero) {
-    double x = -132445;
+    double x = -134;
     double base = 3;
     long double a2 = pow(x, base);
     long double b2 = s21_pow(x, base);
