@@ -1,5 +1,5 @@
-#ifndef SRC_TESTS_S21_MATH_TESTS_H
-#define SRC_TESTS_S21_MATH_TESTS_H
+#ifndef SRC_TESTS_SRC_S21_MATH_TEST_H_
+#define SRC_TESTS_SRC_S21_MATH_TEST_H_
 #include "../s21_math.h"
 #include <check.h>
 
@@ -19,4 +19,5 @@ Suite* log_suite(void);
 Suite* floor_suite(void);
 Suite* asin_suite(void);
 
-#endif  // SRC_TESTS_S21_MATH_TESTS_H
+#endif  // SRC_TESTS_SRC_S21_MATH_TEST_H_
+
