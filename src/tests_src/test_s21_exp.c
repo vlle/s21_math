@@ -9,10 +9,10 @@ START_TEST(s21_expClassic) {
 } END_TEST
 
 START_TEST(s21_expBig) {
-    double x = 3132;
+    double x = 20;
     long double a2 = expl(x);
     long double b2 = s21_exp(x);
-    ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
+    ck_assert_ldouble_eq_tol(a2, b2, 0.001);
 } END_TEST
 
 START_TEST(s21_expLow) {
