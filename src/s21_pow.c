@@ -4,6 +4,17 @@
 long double s21_pow(double base, double exps) {
     long double n = base;
     long double res = 0;
+    if ((base == 0) && (exps == S21_NAN)) {
+        return S21_NAN;
+    } else if ((base == 0) && (exps < 0)) {
+        return S21_INF;
+    } else if ((base == S21_INF) && (exps < 0)) {
+        return 0;
+    } if ((base == -1) && (exps == -S21_INF)) {
+        return 1;
+    }
+    // if ((base == -S21_INF) && (exps < 0)) return 0;
+    // if ((base < 0) && (s21_fmod(exps, (int) exps) != 0)) return 0;
     if (exps == 0) {
         res = 1;
     } else {
