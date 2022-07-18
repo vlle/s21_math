@@ -10,11 +10,9 @@ long double s21_pow(double base, double exps) {
         return S21_INF;
     } else if ((base == S21_INF) && (exps < 0)) {
         return 0;
-    } if ((base == -1) && (exps == -S21_INF)) {
+    } else if ((base == -1) && (exps == -S21_INF)) {
         return 1;
     }
-    // if ((base == -S21_INF) && (exps < 0)) return 0;
-    // if ((base < 0) && (s21_fmod(exps, (int) exps) != 0)) return 0;
     if (exps == 0) {
         res = 1;
     } else {
