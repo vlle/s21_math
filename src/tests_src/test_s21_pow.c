@@ -9,6 +9,40 @@ START_TEST(s21_powClassic) {
     ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
 } END_TEST
 
+START_TEST(s21_powZeroInf) {
+    double x = 0;
+    double base = -1.0;
+    long double a2 = pow(x, base);
+    long double b2 = s21_pow(x, base);
+    ck_assert_ldouble_infinite(a2);
+    ck_assert_ldouble_infinite(b2);
+} END_TEST
+
+START_TEST(s21_powMinusInf) {
+    double x = -1;
+    double base = -S21_INF;
+    long double a2 = pow(x, base);
+    long double b2 = s21_pow(x, base);
+    ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
+} END_TEST
+
+START_TEST(s21_powZeroNan) {
+    double x = 0;
+    double base = S21_NAN;
+    long double a2 = pow(x, base);
+    long double b2 = s21_pow(x, base);
+    ck_assert_ldouble_nan(a2);
+    ck_assert_ldouble_nan(b2);
+} END_TEST
+
+START_TEST(s21_powInfMinus) {
+    double x = S21_INF;
+    double base = -1;
+    long double a2 = pow(x, base);
+    long double b2 = s21_pow(x, base);
+    ck_assert_ldouble_eq_tol(a2, b2, 1e-7);
+} END_TEST
+
 START_TEST(s21_powUnusual) {
     double x = 441.0;
     double base = 3;
@@ -95,6 +129,10 @@ Suite* pow_suite(void) {
     tcase_add_test(tc_core, s21_powZeroBase);
     tcase_add_test(tc_core, s21_powLessZero);
     tcase_add_test(tc_core, s21_powDouble1);
+    tcase_add_test(tc_core, s21_powZeroInf);
+    tcase_add_test(tc_core, s21_powInfMinus);
+    tcase_add_test(tc_core, s21_powMinusInf);
+    tcase_add_test(tc_core, s21_powZeroNan);
     tcase_add_test(tc_core, s21_powDouble2);
     suite_add_tcase(s, tc_core);
 
