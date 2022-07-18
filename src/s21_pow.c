@@ -4,7 +4,7 @@
 long double s21_pow(double base, double exps) {
     long double n = base;
     long double res = 0;
-    if ((base == 0) && (exps == S21_NAN)) {
+    if ((base == 0) && (is_nan(exps))) {
         return S21_NAN;
     } else if ((base == 0) && (exps < 0)) {
         return S21_INF;
