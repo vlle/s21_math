@@ -3,6 +3,7 @@
 long double s21_cos(double x) {
     long double s21_cos = 0;
     if ((is_nan(x)) || (is_inf(x))) return S21_NAN;
+    x = s21_fmod(x, 2 * S21_PI);
     while (x > 2 * S21_PI || x < -2 * S21_PI) {
         if (x > 2 * S21_PI) {
             x = x - 2 * S21_PI;
