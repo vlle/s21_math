@@ -8,5 +8,13 @@ long double s21_floor(double x) {
     if (is_nan(x)) {
         return S21_NAN;
     }
-    return (int) x;
+    if (x >= 0) {
+        return (long int) x;
+    } else {
+        if ((x - (long) x) <= -0.0000001) {
+            return (long int) x - 1;
+        } else {
+            return x;
+        }
+    }
 }
