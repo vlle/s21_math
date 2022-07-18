@@ -3,7 +3,6 @@ WARNINGS    := -Wall -Werror -Wextra
 CFLAGS      := -std=c11 -pedantic $(WARNINGS)
 INC_CHECK   := $(shell pkg-config --cflags check)
 LFLAGS      := $(shell pkg-config --cflags --libs check) 
-LFLAGS -= -lcheck
 TEST_FLAGS  := --coverage -c -g
 
 OBJ_DIR     := obj
