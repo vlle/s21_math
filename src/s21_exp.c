@@ -1,7 +1,8 @@
 #include "s21_math.h"
+#include <float.h>
 
 long double s21_exp(double x) {
-    long double y, q, ex, s, a;
+    long double y, q, ex;
     int i, p;
     if (is_inf(x)) {
         return S21_INF;
@@ -20,11 +21,11 @@ long double s21_exp(double x) {
                 i++;
             } while (i <= s21_fabs(p));
             if (p < 0)
-            y = 1 / y;
+                y = 1 / y;
         }
         if (q) {
-            s = 1;
-            a = 1;
+            long double s = 1;
+            long double a = 1;
             i = 1;
             do {
                 a *= q / i;
