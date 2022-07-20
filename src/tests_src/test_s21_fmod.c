@@ -58,6 +58,20 @@ START_TEST(s21_fmodInf) {
     ck_assert_ldouble_nan(my_ans);
 } END_TEST
 
+START_TEST(s21_fmodWhat) {
+  ck_assert_ldouble_eq(s21_fmod(2.34, -2.0), fmod(2.34, -2.0));
+}
+END_TEST
+
+START_TEST(s21_fmodWhat2) {
+  double num = NAN;
+  long double orig_res = fmod(2.0, num), our_res = s21_fmod(2.0, num);
+  int suc = 0;
+  if (isnan(orig_res) && isnan(our_res)) suc = 1;
+  ck_assert_int_eq(1, suc);
+}
+END_TEST
+
 Suite* fmod_suite(void) {
     Suite* s;
     TCase* tc_core;
@@ -65,6 +79,8 @@ Suite* fmod_suite(void) {
     s = suite_create("fmod");
     tc_core = tcase_create("Core");
 
+    tcase_add_test(tc_core, s21_fmodWhat);
+    tcase_add_test(tc_core, s21_fmodWhat2);
     tcase_add_test(tc_core, s21_fmod_both_positive);
     tcase_add_test(tc_core, s21_fmod_both_negative);
     tcase_add_test(tc_core, s21_fmod_one_positive);
