@@ -1,8 +1,8 @@
 CC          := gcc
 WARNINGS    := -Wall -Werror -Wextra 
 CFLAGS      := -std=c11 -pedantic $(WARNINGS)
-INC_CHECK   := $(shell pkg-config --cflags check)
-LFLAGS      := $(shell pkg-config --cflags --libs check) 
+INC_CHECK   ?= $(shell pkg-config --cflags check)
+LFLAGS      ?= $(shell pkg-config --cflags --libs check) 
 TEST_FLAGS  := --coverage -c -g
 
 OBJ_DIR     := obj
