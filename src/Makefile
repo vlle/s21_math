@@ -21,10 +21,6 @@ MATH_TEST := math_tests.c
 
 all: cpplint test 
 
-test_1: s21_math.a
-	gcc main.c s21_math.a -o main.o 
-	./main.o
-
 test: s21_math.a $(TEST_OBJ_DIR)/main.o $(TEST_OBJ)
 	$(CC) $(LFLAGS) $(TEST_OBJ) $(TEST_OBJ_DIR)/main.o s21_math.a -o test
 	- ./test
