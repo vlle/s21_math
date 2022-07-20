@@ -21,11 +21,15 @@ MATH_TEST := math_tests.c
 
 all: cpplint test 
 
+test_1: s21_math.a
+	gcc main.c s21_math.a -o main.o 
+	./main.o
+
 test: s21_math.a $(TEST_OBJ_DIR)/main.o $(TEST_OBJ)
 	$(CC) $(LFLAGS) $(TEST_OBJ) $(TEST_OBJ_DIR)/main.o s21_math.a -o test
 	- ./test
 
-s21_math.a: $(MATH_OBJ)
+s21_math.a: clean_lib $(MATH_OBJ)
 	ar rc s21_math.a $(MATH_OBJ)
 	ranlib 	s21_math.a
 
@@ -42,7 +46,7 @@ $(TEST_OBJ_DIR)/%.o: $(TEST_SRC_DIR)/%.c
 	$(CC) $(INC_CHECK) -c $^ -o $@
 
 
-gcov_report: $(TEST_OBJ_DIR)/main.o $(GCOV_OBJ) $(MATH_SRC)
+gcov_report: clean_lib $(TEST_OBJ_DIR)/main.o $(GCOV_OBJ) $(MATH_SRC)
 	ar rc s21_math.a $(GCOV_OBJ)
 	ranlib 	s21_math.a
 	$(CC) $(LFLAGS) --coverage $(TEST_OBJ) $(TEST_OBJ_DIR)/main.o s21_math.a -o test
