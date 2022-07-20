@@ -25,7 +25,7 @@ test: s21_math.a $(TEST_OBJ_DIR)/main.o $(TEST_OBJ)
 	$(CC) $(LFLAGS) $(TEST_OBJ) $(TEST_OBJ_DIR)/main.o s21_math.a -o test
 	- ./test
 
-s21_math.a: clean_lib $(MATH_OBJ)
+s21_math.a: $(MATH_OBJ)
 	ar rc s21_math.a $(MATH_OBJ)
 	ranlib 	s21_math.a
 
