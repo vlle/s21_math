@@ -19,7 +19,7 @@ GCOV_OBJ  := $(addprefix $(GCOV_OBJ_DIR)/, $(patsubst %.c, %.o, $(MATH_SRC)))
 
 MATH_TEST := math_tests.c
 
-all: cpplint test 
+all: test 
 
 test: s21_math.a $(TEST_OBJ_DIR)/main.o $(TEST_OBJ)
 	$(CC) $(LFLAGS) $(TEST_OBJ) $(TEST_OBJ_DIR)/main.o s21_math.a -o test
@@ -41,22 +41,6 @@ $(TEST_OBJ_DIR)/%.o: $(TEST_SRC_DIR)/%.c
 	@mkdir -p $(TEST_OBJ_DIR)
 	$(CC) $(INC_CHECK) -c $^ -o $@
 
-
-gcov_report: $(TEST_OBJ_DIR)/main.o $(GCOV_OBJ) $(MATH_SRC)
-	ar rc s21_math.a $(GCOV_OBJ)
-	ranlib 	s21_math.a
-	$(CC) $(LFLAGS) --coverage $(TEST_OBJ) $(TEST_OBJ_DIR)/main.o s21_math.a -o test
-	- ./test
-	./../materials/lcov/bin/lcov -f -c --directory . -o ./coverage.info 
-	./../materials/lcov/bin/genhtml coverage.info --output-directory=res
-	#rm -f *.gcda *.gcov *.o *.gcno
-	open res/index.html
-
-$(GCOV_OBJ_DIR)/%.o: %.c
-	@mkdir -p $(GCOV_OBJ_DIR)
-	$(CC) $(CFLAGS) $(TEST_FLAGS) $^ -o $@
-
-
 .PHONY: clean clean_lib clean_bin
 clean: 
 	rm -f *.gcda 
@@ -74,13 +58,4 @@ clean_bin:
 	rm -f $(GCOV_OBJ) 
 
 rebuild: clean clean_lib clean_bin all
-
-cpplint: ${MATH_SRC} ${TEST_SRC} *.h
-ifeq ("","$(wildcard ./CPPLINT.cfg)")
-	@cp -f ../materials/linters/CPPLINT.cfg ./CPPLINT.cfg
-endif
-	@!(python3 ../materials/linters/cpplint.py --extensions=c $^ | grep -q :)
-	@rm -f CPPLINT.cfg
-	@!(grep -r '<math.h>' s21*)
-
 
